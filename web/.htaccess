@@ -1,0 +1,13 @@
+RewriteEngine On
+Options FollowSymLinks
+AddDefaultCharset UTF-8
+
+php_value short_open_tag "Off"
+php_value error_reporting "7"
+php_value memory_limit "512M"
+php_value upload_max_filesize "400M"
+php_value max_file_uploads "80"
+php_value post_max_size "600M"
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* /index.php [L,QSA]
