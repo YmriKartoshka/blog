@@ -42,9 +42,6 @@ class BookController extends Controller
     {
         $id = (int)Yii::$app->request->get('id', 0);
         if ($book = Book::find()->where(['id' => $id])->with('author')->one()) {
-            echo '<pre>';
-            print_r($book);
-            die;
             $this->render('index', ['model' => $book->getAttributes()]);
         }
         throw new HttpException(404);
@@ -54,18 +51,8 @@ class BookController extends Controller
     {
         $form = new BookForm();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->create()) {
-
-            // fixme: Убери 2 строчки, чтобы вызывался рендер
-            print_r($form->getIdBook());
-            die;
-
             return $this->redirect('index?id=' . $form->getIdBook());
         }
-
-        // fixme: Убери 3 строчки, чтобы вызывался рендер
-        echo '<pre>';
-        print_r($form->getAttributes());
-        die;
 
         $this->render('index', ['model' => $form]);
     }
@@ -80,18 +67,10 @@ class BookController extends Controller
             $form->idAuthor = 2;
             $form->idGenre = 2;
             if (/*Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) &&*/ $form->update($id)) {
-                // fixme: Убери 2 строчки, чтобы вызывался рендер
-                print_r($form->getIdBook());
-                die;
 
                 return $this->redirect('index?id=' . $form->getIdBook());
             }
             $form->setAttributes($book->getAttributes());
-
-            // fixme: Убери 3 строчки, чтобы вызывался рендер
-            echo '<pre>';
-            print_r($form->getAttributes());
-            die;
 
             $this->render('update', ['model' => $form]);
         }
