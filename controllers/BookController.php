@@ -54,7 +54,7 @@ class BookController extends Controller
             return $this->redirect('index?id=' . $form->getIdBook());
         }
 
-        $this->render('index', ['model' => $form]);
+        $this->render('create', ['model' => $form]);
     }
 
     public function actionUpdate()

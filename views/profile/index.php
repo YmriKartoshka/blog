@@ -8,21 +8,21 @@
 
 use yii\helpers\Html;
 
-echo Html::beginForm(['/post/create-book'], 'post')
+echo Html::beginForm(['/book/create'], 'post')
     . Html::submitButton(
         'Create book',
         ['class' => 'btn btn-link']
     )
     . Html::endForm();
 
-echo Html::beginForm(['/post/create-event'], 'post')
+echo Html::beginForm(['/event/create'], 'post')
     . Html::submitButton(
         'Create event',
         ['class' => 'btn btn-link']
     )
     . Html::endForm();
 
-echo Html::beginForm(['/site/logout'], 'post')
+echo Html::beginForm(['/login/logout'], 'post')
     . Html::submitButton(
         'Logout',
         ['class' => 'btn btn-link']
