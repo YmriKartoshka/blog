@@ -15,6 +15,7 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
+            'yii\\jui\\' => 8,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -22,6 +23,10 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
             'yii\\codeception\\' => 16,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+        ),
+        'e' => 
+        array (
+            'etsoft\\widgets\\' => 15,
         ),
         'c' => 
         array (
@@ -37,6 +42,10 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
         'yii\\swiftmailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
+        ),
+        'yii\\jui\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-jui',
         ),
         'yii\\gii\\' => 
         array (
@@ -65,6 +74,10 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'etsoft\\widgets\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/et-soft/yii2-widget-select-year',
         ),
         'cebe\\markdown\\' => 
         array (

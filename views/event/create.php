@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
 <?= $form->field($model, 'content')->textArea(['rows' => 10, 'cols' => 70]) ?>
-<?= $form->field($model, 'date')->widget(DatePicker::className()) ?>
+<?= $form->field($model, 'date')->widget(DatePicker::className(), ['dateFormat' => 'yyyy-M-dd']) ?>
 
 <br>
 <br>

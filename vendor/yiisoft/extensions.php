@@ -57,4 +57,22 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
+  'et-soft/yii2-widget-select-year' => 
+  array (
+    'name' => 'et-soft/yii2-widget-select-year',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@etsoft/widgets' => $vendorDir . '/et-soft/yii2-widget-select-year',
+    ),
+  ),
+  'yiisoft/yii2-jui' => 
+  array (
+    'name' => 'yiisoft/yii2-jui',
+    'version' => '2.0.6.0',
+    'alias' => 
+    array (
+      '@yii/jui' => $vendorDir . '/yiisoft/yii2-jui',
+    ),
+  ),
 );
