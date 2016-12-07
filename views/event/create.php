@@ -8,6 +8,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\jui\DatePicker;
 
 $this->title = "Create event";
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,15 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'title')->textInput(['autofocus' => true]) ?>
 <?= $form->field($model, 'content')->textArea(['rows' => 10, 'cols' => 70]) ?>
-<?//= DatePicker::widget([
-//'name'  => 'from_date',
-//'value'  => $value,
-////'language' => 'ru',
-////'dateFormat' => 'yyyy-MM-dd',
-//]) ?>
+<?= $form->field($model, 'date')->widget(DatePicker::className()) ?>
 
-<?= $form->field($model, 'date')->textInput() ?>
-
+<br>
+<br>
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'createEvent-button']) ?>

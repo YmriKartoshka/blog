@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-<?= $form->field($model, 'description')->textInput() ?>
+<?= $form->field($model, 'description')->textArea(['rows' => 10, 'cols' => 70]) ?>
 <?//= $form->field($model, 'author')->textInput() ?>
 <?//= $form->field($model, 'genre')->textInput() ?>
 <?//= $form->field($model, 'year')->textInput() ?>

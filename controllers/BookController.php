@@ -54,7 +54,7 @@ class BookController extends Controller
             return $this->redirect('index?id=' . $form->getIdBook());
         }
 
-        $this->render('create', ['model' => $form]);
+        return $this->render('create', ['model' => $form]);
     }
 
     public function actionUpdate()
@@ -72,7 +72,7 @@ class BookController extends Controller
             }
             $form->setAttributes($book->getAttributes());
 
-            $this->render('update', ['model' => $form]);
+            return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);
     }
