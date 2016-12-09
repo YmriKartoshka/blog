@@ -47,6 +47,14 @@ class BookForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'idAuthor'  => 'Author',
+            'idGenre'   => 'Genre',
+        ];
+    }
+
     public function create()
     {
         if (! $this->validate()) {

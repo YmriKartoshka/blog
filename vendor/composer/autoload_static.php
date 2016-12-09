@@ -24,6 +24,11 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
+        'k' => 
+        array (
+            'kartik\\select2\\' => 15,
+            'kartik\\base\\' => 12,
+        ),
         'e' => 
         array (
             'etsoft\\widgets\\' => 15,
@@ -74,6 +79,14 @@ class ComposerStaticInit49fecfeeb0ffe37a568866d6b8594037
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'kartik\\select2\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-widget-select2',
+        ),
+        'kartik\\base\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kartik-v/yii2-krajee-base',
         ),
         'etsoft\\widgets\\' => 
         array (

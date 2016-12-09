@@ -57,6 +57,22 @@ class BookController extends Controller
         return $this->render('create', ['model' => $form]);
     }
 
+    public function getAuthors() {
+        $authors = [
+            0 => 'Пушкин А.С.',
+            1 => 'Лермонтов М.Ю.',
+            2 => 'Пупкин Вася',];
+        return $authors;
+    }
+
+    public function getGenres() {
+        $authors = [
+            0 => 'Фантастика',
+            1 => 'Детектив',
+            2 => 'Роман',];
+        return $authors;
+    }
+
     public function actionUpdate()
     {
         $id = (int)Yii::$app->request->get('id', 0);
