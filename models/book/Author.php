@@ -73,4 +73,14 @@ class Author extends ActiveRecord
             'deathDay'   => 'Death Day',
         ];
     }
+
+    static function toArrayAuthor($models)
+    {
+        $result = [];
+        foreach ($models as $model)
+        {
+            $result[$model->id] = $model->lastName . ' ' . $model->firstName . ' ' . $model->secondName;
+        }
+        return $result;
+    }
 }

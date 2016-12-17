@@ -3,7 +3,10 @@
 namespace app\controllers;
 
 use app\forms\BookForm;
+use app\models\book\Genre;
+use app\models\book\Author;
 use app\models\book\Book;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -41,8 +44,12 @@ class BookController extends Controller
     public function actionIndex()
     {
         $id = (int)Yii::$app->request->get('id', 0);
-        if ($book = Book::find()->where(['id' => $id])->with('author')->one()) {
-            $this->render('index', ['model' => $book->getAttributes()]);
+        if ($book = Book::find()->where(['id' => $id])->with('author')->with('genre')->one()) {
+            $user = User::findOne(['profileId' => $book->creatorId]);
+            return $this->render('index', [
+                'model'  => $book,
+                'userId' => $user->id,
+            ]);
         }
         throw new HttpException(404);
     }
@@ -53,24 +60,19 @@ class BookController extends Controller
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->create()) {
             return $this->redirect('index?id=' . $form->getIdBook());
         }
-
         return $this->render('create', ['model' => $form]);
     }
 
-    public function getAuthors() {
-        $authors = [
-            0 => 'Пушкин А.С.',
-            1 => 'Лермонтов М.Ю.',
-            2 => 'Пупкин Вася',];
-        return $authors;
+    public function getAuthors()
+    {
+        $authorsModels = Author::find()->all();
+        return Author::toArrayAuthor($authorsModels);
     }
 
-    public function getGenres() {
-        $authors = [
-            0 => 'Фантастика',
-            1 => 'Детектив',
-            2 => 'Роман',];
-        return $authors;
+    public function getGenres()
+    {
+        $genresModels = Genre::find()->all();
+        return Genre::toArrayGenre($genresModels);
     }
 
     public function actionUpdate()
@@ -78,16 +80,10 @@ class BookController extends Controller
         $id = (int)Yii::$app->request->get('id', 0);
         if ($book = Book::find()->where(['id' => $id])->one()) {
             $form = new BookForm();
-            $form->name = 'asd';
-            $form->description = '124123';
-            $form->idAuthor = 2;
-            $form->idGenre = 2;
-            if (/*Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) &&*/ $form->update($id)) {
-
+            if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
                 return $this->redirect('index?id=' . $form->getIdBook());
             }
             $form->setAttributes($book->getAttributes());
-
             return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);

@@ -48,4 +48,14 @@ class Genre extends ActiveRecord
             'name' => 'Name',
         ];
     }
+
+    static function toArrayGenre($models)
+    {
+        $result = [];
+        foreach ($models as $model)
+        {
+            $result[$model->id] = $model->name;
+        }
+        return $result;
+    }
 }

@@ -21,12 +21,5 @@ echo Html::beginForm(['/event/create'], 'post')
         ['class' => 'btn btn-link']
     )
     . Html::endForm();
-
-echo Html::beginForm(['/login/logout'], 'post')
-    . Html::submitButton(
-        'Logout',
-        ['class' => 'btn btn-link']
-    )
-    . Html::endForm();
 ?>
 

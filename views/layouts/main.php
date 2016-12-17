@@ -28,29 +28,23 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Knigopoisk',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
+        'brandUrl'   => Yii::$app->homeUrl,
+        'options'    => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => Yii::$app->user->isGuest
-            ? [
-                ['label' => 'Login', 'url' => ['/login']],
-                ['label' => 'Registration', 'url' => ['/register']]
-            ]
-            : [
-                '<li>'
-                . Html::beginForm(['/profile'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                        "userName",
-//                    Yii::$app->user->identity->username,
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            ]
+        'items'   => [
+            Yii::$app->user->isGuest ? ([
+                'label' => 'Login',
+                'url'   => ['/login'],
+            ]) : ('<li>' . Html::beginForm(['/profile'], 'post', ['class' => 'navbar-form']) . Html::submitButton('See profile (' . Yii::$app->user->identity->login . ')',
+                    ['class' => 'btn btn-link']) . Html::endForm() . '</li>') .
+            ('<li>' . Html::beginForm(['/login/logout'], 'post', ['class' => 'navbar-form']) . Html::submitButton('Logout', [
+                    'class'  => 'btn btn-link',
+                ]) . Html::endForm() . '</li>'),
+        ],
     ]);
     NavBar::end();
     ?>

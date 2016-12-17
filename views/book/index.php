@@ -7,43 +7,27 @@
  */
 
 use yii\helpers\Html;
+
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pull-right btn-group">
-    <?php if(Yii::$app->user->id === $post->author_id) echo Html::a('Update', array('post/update', 'id' => $post->id), array('class' => 'btn btn-primary')); ?>
-    <?php if(Yii::$app->user->id === $post->author_id) echo Html::a('Delete', array('post/delete', 'id' => $post->id), array('class' => 'btn btn-danger')); ?>
+    <?php if (Yii::$app->user->id === $userId) {
+        echo Html::a('Update', [
+            'book/update',
+            'id' => $model->id,
+        ], ['class' => 'btn btn-primary']);
+    } ?>
 </div>
 
-<?php if(Yii::$app->session->hasFlash('CommentDeleted')): ?>
-    <div class="alert alert-success">
-        Your post has successfully been deleted!
-    </div>
-<?php endif; ?>
-
-<h1><?php echo $post->title; ?></h1>
-<time><?php echo 'Post created: ' . date('F j, Y', $post->create_time); ?></time><br /><br />
-<p><?php echo 'Author: ' . $post->author; ?></p>
-<p><?php echo 'Genre: ' . $post->genre; ?></p>
-<p><?php echo 'Year of publication: ' . $post->year; ?></p>
-<p><?php echo $post->content; ?></p>
+<h1><?php echo $model->name; ?></h1>
+<time><?php echo 'Date of publication: ' . $model->createDate; ?></time><br /><br />
+<p><?php echo 'Author: ' . $model->author->lastName . ' ' . $model->author->firstName . ' ' . $model->author->secondName; ?></p>
+<p><?php echo 'Genre: ' . $model->genre->name; ?></p>
+<p><?php echo 'Year of publication: ' . $model->year; ?></p>
+<p><?php echo $model->description; ?></p>
 
 <hr />
 <h3>Comments</h3>
 <div class="clearfix"></div>
 
-<div class="row">
-    <?php
-    /**
-     * @var \app\models\Comment[] $comments
-     */
-    ?>
-    <?php foreach ($comments as $comment): ?>
-        <div class="col-lg-12">
-            <br />
-            <p>Author: <?php echo $comment->author->username; ?></p>
-            <p><?php echo $comment->content; ?></p>
-            <p><?php if($comment->author_id === Yii::$app->user->id) echo Html::a('Update', array('post/read','id'=>$comment->post_id, 'id_comment'=>$comment->id), array('class'=>'icon icon-edit')); ?>
-                <?php if($comment->author_id === Yii::$app->user->id) echo Html::a('Delete', array('comment/delete', 'id'=>$comment->id), array('class'=>'icon icon-trash')); ?></p>
-        </div>
-    <?php endforeach; ?>
-</div><hr />
-<?php if(!Yii::$app->user->isGuest) echo $this->render('..' . DIRECTORY_SEPARATOR . 'comment' . DIRECTORY_SEPARATOR . 'commentcreate', array('newcomment' => $newcomment)); ?>

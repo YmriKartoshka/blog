@@ -4,11 +4,11 @@ return [
     'components' => [
         'db' => [
             'class'       => 'yii\db\Connection',
-            'dsn'         => 'pgsql:host=localhost;dbname=ov',
+            'dsn'         => 'pgsql:host=localhost;dbname=b',
             'username'    => 'postgres',
-            'password'    => 'Nescafe123',
+            'password'    => 'gfhjkzrf',
             'charset'     => 'utf8',
-            'tablePrefix' => 'ov_',
+            'tablePrefix' => 'b_',
         ],
     ],
 ];

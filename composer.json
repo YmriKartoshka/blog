@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "et-soft/yii2-widget-select-year": "*",
         "yiisoft/yii2-jui": "*",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "codeception/codeception": "^2.2"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
