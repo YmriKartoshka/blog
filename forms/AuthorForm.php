@@ -45,13 +45,6 @@ class AuthorForm extends Model
                 ],
                 'required',
             ],
-            [
-                [
-                    'birthDay',
-                    'deathDay',
-                ],
-                'date',
-            ],
         ];
     }
 

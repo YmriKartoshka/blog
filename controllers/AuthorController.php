@@ -31,7 +31,7 @@ class AuthorController extends Controller
     {
         $form = new AuthorForm();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->create()) {
-            return $this->redirect('../book/create');
+            return $this->redirect('../site/index');
         }
         return $this->render('index', ['model' => $form]);
     }
