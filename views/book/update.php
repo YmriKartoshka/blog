@@ -37,14 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]) ?>
 
-<div class="form-group">
-    <div class="col-lg-offset-1 col-lg-11">
-        <?= Html::a('Add', [
-            'author/create'
-        ], ['class' => 'btn btn-primary']); ?>
-    </div>
-</div>
-
 <?= $form->field($model, 'genreId')->widget(Select2::class, [
     'data'          => $this->context->getGenres(),
     'language'      => 'ru',
@@ -53,14 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'allowClear' => true,
     ],
 ]) ?>
-
-<div class="form-group">
-    <div class="col-lg-offset-1 col-lg-11">
-        <?= Html::a('Add', [
-            'genre/create'
-        ], ['class' => 'btn btn-primary']); ?>
-    </div>
-</div>
 
 
 <?= $form->field($model, 'year')->widget(YearSelectbox::class, [
