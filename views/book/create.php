@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\helpers\ArrayHelper;
+use app\controllers\BookController;
 use etsoft\widgets\YearSelectbox;
 use kartik\select2\Select2;
 
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 
 <?= $form->field($model, 'authorId')->widget(Select2::class, [
-    'data'          => $this->context->getAuthors(),
+    'data'          => BookController::getAuthors(),
     'language'      => 'ru',
     'options'       => ['placeholder' => 'Select author...'],
     'pluginOptions' => [
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 
 <?= $form->field($model, 'genreId')->widget(Select2::class, [
-    'data'          => $this->context->getGenres(),
+    'data'          => BookController::getGenres(),
     'language'      => 'ru',
     'options'       => ['placeholder' => 'Select genre...'],
     'pluginOptions' => [
@@ -46,12 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]) ?>
 
-<?= $form->field($model, 'year')->widget(YearSelectbox::class, [
-    'yearStart'     => 2016,
-    'yearStartType' => 'fix',
-    'yearEnd'       => 1800,
-    'yearEndType'   => 'fix',
-]); ?>
+<?= $form->field($model, 'year')->widget(Select2::class, [
+    'data'          => range(2016, 1800),
+    'options'       => ['placeholder' => 'Select year...'],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+]) ?>
 
 
 <div class="form-group">

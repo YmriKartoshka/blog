@@ -21,7 +21,7 @@ class BookController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'search'],
                         'allow'   => true,
                         'roles'   => [
                             '?',
@@ -63,13 +63,13 @@ class BookController extends Controller
         return $this->render('create', ['model' => $form]);
     }
 
-    public function getAuthors()
+    static function getAuthors()
     {
         $authorsModels = Author::find()->all();
         return Author::toArrayAuthor($authorsModels);
     }
 
-    public function getGenres()
+    static function getGenres()
     {
         $genresModels = Genre::find()->all();
         return Genre::toArrayGenre($genresModels);
@@ -84,6 +84,7 @@ class BookController extends Controller
                 return $this->redirect('index?id=' . $form->getIdBook());
             }
             $form->setAttributes($book->getAttributes());
+            $form->year = 2016 - $form->year;
             return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);

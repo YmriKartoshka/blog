@@ -1,6 +1,9 @@
 <?php
 
 use yii\bootstrap\ActiveForm;
+use kartik\select2\Select2;
+use etsoft\widgets\YearSelectbox;
+use app\controllers\BookController;
 
 $this->title = 'Knigopoisk';
 ?>
@@ -15,7 +18,36 @@ $this->title = 'Knigopoisk';
     ],
 ]); ?>
 
-<?= $form->field($search, 'name')->textInput(['autofocus' => true]) ?>
+<?= $form->field($search, 'name')->textInput() ?>
+
+<?= $form->field($search, 'description')->textInput() ?>
+
+<?= $form->field($search, 'authorId')->widget(Select2::class, [
+    'data'          => BookController::getAuthors(),
+    'language'      => 'ru',
+    'options'       => ['placeholder' => 'Select author...'],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+]) ?>
+
+<?= $form->field($search, 'genreId')->widget(Select2::class, [
+    'data'          => BookController::getGenres(),
+    'language'      => 'ru',
+    'options'       => ['placeholder' => 'Select genre...'],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+]) ?>
+
+<?= $form->field($search, 'year')->widget(Select2::class, [
+    'data'          => range(2016, 1800),
+    'language'      => 'ru',
+    'options'       => ['placeholder' => 'Select year...'],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+]) ?>
 
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
@@ -23,9 +55,6 @@ $this->title = 'Knigopoisk';
             'class' => 'btn btn-primary',
             'name'  => 'find-button',
         ]); ?>
-        <?= Html::a('Advanced Search', [
-            'search',
-        ], ['class' => 'btn btn-primary']); ?>
     </div>
 </div>
 

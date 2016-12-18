@@ -108,7 +108,7 @@ class Book extends ActiveRecord
 
     public function getBooks()
     {
-        return $this->find()->all();
+        return $this->find()->orderBy('id')->all();
     }
 
     public function beforeSave($insert)

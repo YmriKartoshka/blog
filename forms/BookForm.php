@@ -2,8 +2,6 @@
 
 namespace app\forms;
 
-use app\models\book\Balink;
-use app\models\book\Bglink;
 use app\models\book\Book;
 use app\models\User;
 use yii\base\Model;
@@ -66,6 +64,7 @@ class BookForm extends Model
 
         $this->book = new Book();
         $this->book->setAttributes($this->getAttributes());
+        $this->book->year = 2016 - $this->book->year;
         if (! $this->book->save()) {
             $this->addError('name', 'Ошбка при сохранении книги в БД');
             return false;
@@ -80,11 +79,17 @@ class BookForm extends Model
         }
         $this->book = Book::find()->where(['id' => $id])->one();
         $this->book->setAttributes($this->getAttributes());
+        $this->book->year = 2016 - $this->book->year;
         if (! $this->book->save()) {
             $this->addError('name', 'Ошбка при сохранении книги в БД');
             return false;
         }
         return true;
+    }
+
+    public function searchBook()
+    {
+        return Book::find()->filterWhere(['like', 'name', $this->name])->orderBy('id')->all();
     }
 
     public function getIdBook()
