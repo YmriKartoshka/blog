@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\BookController;
-use etsoft\widgets\YearSelectbox;
 use kartik\select2\Select2;
 
 //use app\forms\AuthorForm;
@@ -30,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'authorId')->widget(Select2::class, [
     'data'          => BookController::getAuthors(),
-    'language'      => 'ru',
+    'language'      => 'en',
     'options'       => ['placeholder' => 'Select author...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -39,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'genreId')->widget(Select2::class, [
     'data'          => BookController::getGenres(),
-    'language'      => 'ru',
+    'language'      => 'en',
     'options'       => ['placeholder' => 'Select genre...'],
     'pluginOptions' => [
         'allowClear' => true,

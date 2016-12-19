@@ -60,24 +60,11 @@ $this->title = 'Knigopoisk';
 
 <?php ActiveForm::end(); ?>
 
-<div class="clearfix"></div>
-<table class="table table-striped table-hover">
-    <tr>
-        <td>#</td>
-        <td>Title</td>
-    </tr>
+<div class="row">
     <?php foreach ($books as $book): ?>
-        <tr>
-            <td>
-                <?php echo Html::a($book->id, [
-                    'book/index',
-                    'id' => $book->id,
-                ]); ?>
-            </td>
-            <td><?php echo Html::a($book->name, [
-                    'book/index',
-                    'id' => $book->id,
-                ]); ?></td>
-        </tr>
+        <div class="col-lg-12">
+            <hr /><h2><?php echo Html::a($book->name, array('book/index', 'id'=>$book->id)); ?></h2><hr />
+        </div>
     <?php endforeach; ?>
-</table>
+</div>
+
