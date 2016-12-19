@@ -41,7 +41,6 @@ class AuthorForm extends Model
                     'lastName',
                     'secondName',
                     'birthDay',
-                    'deathDay',
                 ],
                 'required',
             ],

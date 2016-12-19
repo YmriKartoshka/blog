@@ -41,10 +41,13 @@ $this->title = 'Knigopoisk';
 ]); ?>
 
 
-<div class="row">
+    <div class="row">
     <?php foreach ($books as $book): ?>
         <div class="col-lg-12">
-            <hr /><h2><?php echo Html::a($book->name, array('book/index', 'id'=>$book->id)); ?></h2><hr />
+            <hr /><h2><?php echo Html::a($book->name, [
+                    'book/index',
+                    'id' => $book->id,
+                ]); ?></h2><hr />
         </div>
     <?php endforeach; ?>
 </div>

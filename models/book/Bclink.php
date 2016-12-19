@@ -5,19 +5,19 @@ namespace app\models\book;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%balink}}".
+ * This is the model class for table "{{%bclink}}".
  *
  * @property integer $idBook
- * @property integer $idAuthor
+ * @property integer $idComment
  */
-class Balink extends ActiveRecord
+class Bclink extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%balink}}';
+        return '{{%bclink}}';
     }
 
     /**
@@ -29,14 +29,14 @@ class Balink extends ActiveRecord
             [
                 [
                     'idBook',
-                    'idAuthor',
+                    'idComment',
                 ],
                 'required',
             ],
             [
                 [
                     'idBook',
-                    'idAuthor',
+                    'idComment',
                 ],
                 'integer',
             ],
@@ -49,8 +49,8 @@ class Balink extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idBook' => 'Id Book',
-            'idAuthor' => 'Id Author',
+            'idBook'    => 'Id Book',
+            'idComment' => 'Id Comment',
         ];
     }
 }

@@ -39,8 +39,8 @@ AppAsset::register($this);
             Yii::$app->user->isGuest ? ([
                 'label' => 'Login',
                 'url'   => ['/login'],
-            ]) : ('<li>' . Html::beginForm(['/profile'], 'post', ['class' => 'navbar-form']) . Html::submitButton('See profile (' . Yii::$app->user->identity->login . ')',
-                    ['class' => 'btn btn-link']) . Html::endForm() . '</li>') .
+            ]) : ('<li>' . Html::beginForm(['/profile'], 'post', ['class' => 'navbar-form']) . Html::a('See profile (' . Yii::$app->user->identity->login . ')',
+                    ['profile/index', 'id' => Yii::$app->user->id], ['class'  => 'btn btn-link']) . Html::endForm() . '</li>') .
             ('<li>' . Html::beginForm(['/login/logout'], 'post', ['class' => 'navbar-form']) . Html::submitButton('Logout', [
                     'class'  => 'btn btn-link',
                 ]) . Html::endForm() . '</li>'),

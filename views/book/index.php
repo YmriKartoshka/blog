@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: minaevaolga
- * Date: 12/4/16
- * Time: 11:20 PM
- */
 
 use yii\helpers\Html;
 
@@ -28,6 +22,31 @@ $this->params['breadcrumbs'][] = $this->title;
 <p><?php echo $model->description; ?></p>
 
 <hr />
-<h3>Comments</h3>
+<h2>Comments</h2>
 <div class="clearfix"></div>
+<table class="table table-striped table-hover">
+    <tr>
+        <td>Author</td>
+        <td>Content</td>
+    </tr>
+    <?php foreach ($model->comment as $comment): ?>
+        <tr>
+            <td>
+                <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
+                    'profile/index',
+                    'id' => $comment->author->id,
+                ]); ?>
+            </td>
+            <td>
+				<?php echo $comment->message; ?>
+			</td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<?php if (! Yii::$app->user->isGuest) {
+    echo $this->render('../comment/create', [
+        'newcomment' => $newcomment,
+        'id'         => $model->id,
+    ]);
+} ?>
 
