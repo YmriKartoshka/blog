@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use dosamigos\datepicker\DatePicker;
 
 $this->title                   = 'Create author';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,9 +31,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'secondName')->textInput() ?>
 
-    <?= $form->field($model, 'birthDay')->textInput() ?>
+    <?= $form->field($model, 'birthDay')->widget(
+        DatePicker::className(), [
+        'inline'        => true,
+        'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format'    => 'yyyy-m-dd',
+            'todayBtn'  => false
+        ]
+    ]);?>
 
-    <?= $form->field($model, 'deathDay')->textInput() ?>
+    <?= $form->field($model, 'deathDay')->widget(
+        DatePicker::className(), [
+        'inline'        => true,
+        'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format'    => 'yyyy-m-dd',
+            'todayBtn'  => false
+        ]
+    ]);?>
 
     <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
