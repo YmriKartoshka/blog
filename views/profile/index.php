@@ -12,15 +12,23 @@ $this->params['breadcrumbs'][] = $this->title;
 use yii\helpers\Html;
 
 ?>
+<div class="row">
+    <div class="col-lg-6">
+        <h1><?php echo 'Profile'?></h1>
+    </div>
 
-<div class="pull-right btn-group">
-    <?php if (Yii::$app->user->id === $profile->id) {
-        echo Html::a('Update', [
-            'profile/update',
-            'id' => $profile->id,
-        ], ['class' => 'btn btn-primary']);
-    } ?>
+    <div class="col-lg-6">
+         <span class="pull-right">
+             <?php if (Yii::$app->user->id === $profile->id) {
+                 echo Html::a('Update', [
+                         'profile/update',
+                     'id' => $profile->id,
+                 ], ['class' => 'btn btn-primary']);
+             } ?>
+         </span>
+    </div>
 </div>
+<hr/>
 
 <div class="row">
     <div class="col-lg-6">
