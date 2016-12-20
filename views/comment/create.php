@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use kartik\select2\Select2;
 
 ?>
 
@@ -14,6 +15,15 @@ use yii\bootstrap\ActiveForm;
         'labelOptions' => ['class' => 'col-lg-1 control-label'],
     ],
 ]); ?>
+
+<?= $commentForm->field($newcomment, 'grade')->widget(Select2::class, [
+    'data'          => range(0, 5),
+    'options'       => ['placeholder' => 'Select grade...'],
+    'pluginOptions' => [
+        'allowClear' => true,
+    ],
+]) ?>
+
 <?= $commentForm->field($newcomment, 'message')->textArea([
     'rows' => 3,
     'cols' => 250,
@@ -24,7 +34,7 @@ use yii\bootstrap\ActiveForm;
                 'class' => 'btn btn-primary',
                 'name'  => 'createBook-button',
                 'value' => $id,
-            ]) ?>
+            ]); ?>
 		</div>
 	</div>
 <?php ActiveForm::end(); ?>

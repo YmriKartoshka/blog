@@ -13,6 +13,15 @@ use yii\helpers\Html;
 
 ?>
 
+<div class="pull-right btn-group">
+    <?php if (Yii::$app->user->id === $profile->id) {
+        echo Html::a('Update', [
+            'profile/update',
+            'id' => $profile->id,
+        ], ['class' => 'btn btn-primary']);
+    } ?>
+</div>
+
 <p><?php echo 'First Name: ' . $profile->firstName; ?></p>
 <p><?php echo 'Last Name: ' . $profile->lastName; ?></p>
 <p><?php echo 'Second Name: ' . $profile->secondName; ?></p>

@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-$this->title = $model->name;
+$this->title                   = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pull-right btn-group">
@@ -15,7 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <h1><?php echo $model->name; ?></h1>
-<time><?php echo 'Date of publication: ' . $model->createDate; ?></time><br /><br />
+<time><?php echo 'Date of publication: ' . $model->createDate; ?></time><br />
+<?php echo 'Creator ' . Html::a($model->creator->firstName . ' ' . $model->creator->lastName, [
+        'profile/index',
+        'id' => $model->creator->id,
+    ]); ?><br /><br />
 <p><?php echo 'Author: ' . $model->author->lastName . ' ' . $model->author->firstName . ' ' . $model->author->secondName; ?></p>
 <p><?php echo 'Genre: ' . $model->genre->name; ?></p>
 <p><?php echo 'Year of publication: ' . $model->year; ?></p>
@@ -28,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <tr>
         <td>Author</td>
         <td>Content</td>
+        <td>Grade</td>
     </tr>
     <?php foreach ($model->comment as $comment): ?>
         <tr>
@@ -39,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </td>
             <td>
 				<?php echo $comment->message; ?>
+			</td>
+            <td>
+				<?php echo $comment->grade; ?>
 			</td>
         </tr>
     <?php endforeach; ?>

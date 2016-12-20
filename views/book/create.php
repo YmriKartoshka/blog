@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\BookController;
-use etsoft\widgets\YearSelectbox;
 use kartik\select2\Select2;
 
 //use app\forms\AuthorForm;

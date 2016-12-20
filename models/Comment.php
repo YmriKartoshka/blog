@@ -38,6 +38,12 @@ class Comment extends ActiveRecord
                 'max' => 100,
             ],
             [
+                ['grade'],
+                'integer',
+                'min' => 0,
+                'max' => 5,
+            ],
+            [
                 ['creatorId'],
                 'exist',
                 'skipOnError'     => true,

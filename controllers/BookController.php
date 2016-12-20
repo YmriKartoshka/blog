@@ -49,7 +49,7 @@ class BookController extends Controller
     {
         $newcomment = new Comment();
         $id         = (int)Yii::$app->request->get('id', 0);
-        if ($book = Book::find()->where(['id' => $id])->with('author')->with('genre')->with('comment')->one()) {
+        if ($book = Book::find()->where(['id' => $id])->with('creator')->with('author')->with('genre')->with('comment')->one()) {
             $user = User::findOne(['profileId' => $book->creatorId]);
             return $this->render('index', [
                 'model'      => $book,

@@ -6,6 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use app\models\Comment;
+use app\models\Profile;
 
 /**
  * This is the model class for table "{{%book}}".
@@ -105,6 +106,11 @@ class Book extends ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(Author::class, ['id' => 'authorId']);
+    }
+
+    public function getCreator()
+    {
+        return $this->hasOne(Profile::class, ['id' => 'creatorId']);
     }
 
     public function getGenre()
