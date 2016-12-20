@@ -2,6 +2,7 @@
 
 use yii\bootstrap\ActiveForm;
 
+$this->title = 'Knigopoisk';
 ?>
 <?php use yii\helpers\Html; ?>
 
@@ -27,6 +28,7 @@ use yii\bootstrap\ActiveForm;
             ], ['class' => 'btn btn-primary']); ?>
         </div>
     </div>
+
 <?php ActiveForm::end(); ?>
 
 <?php $form = ActiveForm::begin([
@@ -38,10 +40,14 @@ use yii\bootstrap\ActiveForm;
     ],
 ]); ?>
 
-<div class="row">
+
+    <div class="row">
     <?php foreach ($books as $book): ?>
         <div class="col-lg-12">
-            <hr /><h3><?php echo Html::a($book->name, array('book/index', 'id'=>$book->id)); ?></h3><hr />
+            <hr /><h2><?php echo Html::a($book->name, [
+                    'book/index',
+                    'id' => $book->id,
+                ]); ?></h2><hr />
         </div>
     <?php endforeach; ?>
 </div>

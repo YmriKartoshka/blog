@@ -6,21 +6,29 @@
  * Time: 1:23 AM
  */
 
-use yii\helpers\Html;?>
+$this->title                   = 'Profile';
+$this->params['breadcrumbs'][] = $this->title;
 
-<h1><?php echo 'Profile'?></h1>
-<hr/>
+use yii\helpers\Html;
+
+?>
+
+<div class="pull-right btn-group">
+    <?php if (Yii::$app->user->id === $profile->id) {
+        echo Html::a('Update', [
+            'profile/update',
+            'id' => $profile->id,
+        ], ['class' => 'btn btn-primary']);
+    } ?>
+</div>
 
 <div class="row">
     <div class="col-lg-6">
-        <h4><?php echo 'Login: '?></h4>
-        <p><?php echo Yii::$app->user->identity->login?></p>
-        <h4><?php echo 'Last name: '?></h4>
-        <p><?php echo 'Lukoje'?></p>
-        <h4><?php echo 'First name: '?></h4>
-        <p><?php echo 'Ole'?></p>
-        <h4><?php echo 'Moderator: '?></h4>
-        <p><?php echo 'no'?></p>
+        <p><?php echo 'First Name: ' . $profile->firstName; ?></p>
+        <p><?php echo 'Last Name: ' . $profile->lastName; ?></p>
+        <p><?php echo 'Second Name: ' . $profile->secondName; ?></p>
+        <p><?php echo 'Email: ' . $profile->email; ?></p>
+        <p><?php echo 'Phone: ' . $profile->phone; ?></p>
     </div>
 
     <div class="col-lg-6">
@@ -46,10 +54,4 @@ use yii\helpers\Html;?>
         </span>
     </div>
 </div>
-
-
-
-
-
-
 

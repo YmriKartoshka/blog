@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model, 'secondName')->textInput() ?>
 
     <?= $form->field($model, 'birthDay')->widget(
-        DatePicker::className(), [
+        DatePicker::class, [
         'inline'        => true,
         'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
         'clientOptions' => [
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);?>
 
     <?= $form->field($model, 'deathDay')->widget(
-        DatePicker::className(), [
+        DatePicker::class, [
         'inline'        => true,
         'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
         'clientOptions' => [

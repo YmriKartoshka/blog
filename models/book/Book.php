@@ -5,6 +5,8 @@ namespace app\models\book;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use app\models\Comment;
+use app\models\Profile;
 
 /**
  * This is the model class for table "{{%book}}".
@@ -91,9 +93,24 @@ class Book extends ActiveRecord
         ];
     }
 
+    public function getBclink()
+    {
+        return $this->hasMany(Bclink::class, ['idBook' => 'id']);
+    }
+
+    public function getComment()
+    {
+        return $this->hasMany(Comment::class, ['id' => 'idComment'])->with('author')->via('bclink');
+    }
+
     public function getAuthor()
     {
         return $this->hasOne(Author::class, ['id' => 'authorId']);
+    }
+
+    public function getCreator()
+    {
+        return $this->hasOne(Profile::class, ['id' => 'creatorId']);
     }
 
     public function getGenre()

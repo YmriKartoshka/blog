@@ -1,14 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: minaevaolga
- * Date: 12/4/16
- * Time: 11:20 PM
- */
 
 use yii\helpers\Html;
 
-$this->title = $model->name;
+$this->title                   = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pull-right btn-group">
@@ -21,13 +15,46 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <h1><?php echo $model->name; ?></h1>
-<time><?php echo 'Date of publication: ' . $model->createDate; ?></time><br /><br />
+<time><?php echo 'Date of publication: ' . $model->createDate; ?></time><br />
+<?php echo 'Creator ' . Html::a($model->creator->firstName . ' ' . $model->creator->lastName, [
+        'profile/index',
+        'id' => $model->creator->id,
+    ]); ?><br /><br />
 <p><?php echo 'Author: ' . $model->author->lastName . ' ' . $model->author->firstName . ' ' . $model->author->secondName; ?></p>
 <p><?php echo 'Genre: ' . $model->genre->name; ?></p>
 <p><?php echo 'Year of publication: ' . $model->year; ?></p>
 <p><?php echo $model->description; ?></p>
 
 <hr />
-<h3>Comments</h3>
+<h2>Comments</h2>
 <div class="clearfix"></div>
+<table class="table table-striped table-hover">
+    <tr>
+        <td>Author</td>
+        <td>Content</td>
+        <td>Grade</td>
+    </tr>
+    <?php foreach ($model->comment as $comment): ?>
+        <tr>
+            <td>
+                <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
+                    'profile/index',
+                    'id' => $comment->author->id,
+                ]); ?>
+            </td>
+            <td>
+				<?php echo $comment->message; ?>
+			</td>
+            <td>
+				<?php echo $comment->grade; ?>
+			</td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<?php if (! Yii::$app->user->isGuest) {
+    echo $this->render('../comment/create', [
+        'newcomment' => $newcomment,
+        'id'         => $model->id,
+    ]);
+} ?>
 

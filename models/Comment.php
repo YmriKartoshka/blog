@@ -3,27 +3,27 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%comment}}".
  *
  * @property integer $id
- * @property string $content
- * @property integer $create_time
- * @property integer $author_id
- * @property integer $post_id
- *
- * @property User $author
- * @property Post $post
+ * @property string  $message
+ * @property integer $grade
+ * @property integer $isShown
+ * @property integer $creatorId
+ * @property integer $createDate
  */
-class Comment extends \yii\db\ActiveRecord
+class Comment extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%comment}}';
+        return '{{%comments}}';
     }
 
     /**
@@ -32,11 +32,24 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'author_id', 'post_id'], 'required'],
-            [['content'], 'string'],
-            [['create_time', 'author_id', 'post_id'], 'integer'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['author_id' => 'id']],
-            [['post_id'], 'exist', 'skipOnError' => true, 'targetClass' => Post::class, 'targetAttribute' => ['post_id' => 'id']],
+            [
+                ['message'],
+                'string',
+                'max' => 100,
+            ],
+            [
+                ['grade'],
+                'integer',
+                'min' => 0,
+                'max' => 5,
+            ],
+            [
+                ['creatorId'],
+                'exist',
+                'skipOnError'     => true,
+                'targetClass'     => Profile::class,
+                'targetAttribute' => ['creatorId' => 'id'],
+            ],
         ];
     }
 
@@ -46,11 +59,10 @@ class Comment extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'content' => 'Content',
-            'create_time' => 'Create Time',
-            'author_id' => 'Author ID',
-            'post_id' => 'Post ID',
+            'id'         => 'ID',
+            'message'    => 'Message',
+            'createDate' => 'Create Date',
+            'creatorId'  => 'Creator ID',
         ];
     }
 
@@ -59,20 +71,7 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(User::className(), ['id' => 'author_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPost()
-    {
-        return $this->hasOne(Post::class, ['id' => 'post_id']);
-    }
-
-    public function getPosts()
-    {
-        return $this->hasMany(Post::class, ['id' => 'post_id']);
+        return $this->hasOne(Profile::class, ['id' => 'creatorId']);
     }
 
     public function getComment($id_comment)
@@ -80,17 +79,12 @@ class Comment extends \yii\db\ActiveRecord
         return $this->findOne($id_comment);
     }
 
-    public function getCommentOfThisPost($id)
+    public function beforeSave($insert)
     {
-        return $this->find()->where('post_id = :id', [':id' => $id])->all();
+        if ($this->isNewRecord) {
+            $this->creatorId  = Yii::$app->user->id;
+            $this->createDate = new Expression('now()');
+        }
+        return parent::beforeSave($insert);
     }
-
-	public function beforeSave($insert)
-	{
-		if ($this->isNewRecord)
-		{
-			$this->create_time = time();
-		}
-		return parent::beforeSave($insert);
-	}
 }

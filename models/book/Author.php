@@ -52,7 +52,6 @@ class Author extends ActiveRecord
                     'lastName',
                     'secondName',
                     'birthDay',
-                    'deathDay',
                 ],
                 'required',
             ],
