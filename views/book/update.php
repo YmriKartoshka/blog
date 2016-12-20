@@ -6,12 +6,10 @@ use app\controllers\BookController;
 use etsoft\widgets\YearSelectbox;
 use kartik\select2\Select2;
 
-//use app\forms\AuthorForm;
-
 $this->title                   = "Update book";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+<h1><?= Html::encode($this->title) ?></h1><hr/>
 <?php $form = ActiveForm::begin([
     'options'     => ['class' => 'form-horizontal'],
     'fieldConfig' => [

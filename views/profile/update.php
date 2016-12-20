@@ -11,16 +11,24 @@ use kartik\select2\Select2;
 $this->title                   = "Update profile";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
 
-<div class="pull-right btn-group">
-    <?php if (Yii::$app->user->id === $profile->id) {
-        echo Html::a('Change password', [
-            'profile/change',
-            'id' => $profile->id,
-        ], ['class' => 'btn btn-primary']);
-    } ?>
+<div class="row">
+    <div class="col-lg-6">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
+
+    <div class="col-lg-6">
+         <span class="pull-right">
+            <?php if (Yii::$app->user->id === $profile->id) {
+                echo Html::a('Change password', [
+                    'profile/change',
+                    'id' => $profile->id,
+                ], ['class' => 'btn btn-primary']);
+            } ?>
+         </span>
+    </div>
 </div>
+<hr/>
 
 <?php $form = ActiveForm::begin([
     'options'     => ['class' => 'form-horizontal'],
