@@ -3,8 +3,6 @@
 namespace app\controllers;
 
 use app\forms\EventForm;
-use app\models\book\Genre;
-use app\models\book\Author;
 use app\models\book\Book;
 use app\models\Comment;
 use app\models\event\Event;

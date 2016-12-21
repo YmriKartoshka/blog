@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use app\models\event\Subscription;
 
 $this->title                   = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,7 +19,20 @@ $this->params['breadcrumbs'][] = $this->title;
                      'event/update',
                      'id' => $model->id,
                  ], ['class' => 'btn btn-primary']);
-             } ?>
+             }
+             if (Subscription::hasSubscription(Yii::$app->user->id, $model->id)) {
+                 echo Html::a('Unsubscribe', [
+                     'subscription/delete',
+                     'id' => $model->id,
+                 ], ['class' => 'btn btn-primary']);
+             }
+             else
+             {
+                 echo Html::a('Subscribe', [
+                     'subscription/create',
+                     'id' => $model->id,
+                 ], ['class' => 'btn btn-primary']);
+             }?>
          </span>
     </div>
 </div>
