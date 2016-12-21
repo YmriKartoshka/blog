@@ -6,7 +6,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use kartik\widgets\DatePicker;
+use kartik\date\DatePicker;
 
 $this->title                   = 'Create author';
 $this->params['breadcrumbs'][] = $this->title;

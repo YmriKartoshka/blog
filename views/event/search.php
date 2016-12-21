@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
 use app\controllers\EventController;
 use yii\helpers\Html;
-use kartik\widgets\DatePicker;
+use kartik\date\DatePicker;
 
 $this->title                   = "Advanced event search ";
 $this->params['breadcrumbs'][] = $this->title;

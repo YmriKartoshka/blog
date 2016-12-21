@@ -5,9 +5,37 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\forms\LoginForm;
+use yii\filters\AccessControl;
 
 class LoginController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => [
+                            'index',
+                        ],
+                        'allow'   => true,
+                        'roles'   => [
+                            '?',
+                        ],
+                    ],
+                    [
+                        'actions' => [
+                            'logout',
+                        ],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $form = new LoginForm();

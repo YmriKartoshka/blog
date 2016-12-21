@@ -3,8 +3,6 @@
 namespace app\controllers;
 
 use app\forms\EventForm;
-use app\models\book\Genre;
-use app\models\book\Author;
 use app\models\book\Book;
 use app\models\Comment;
 use app\models\event\Event;
@@ -51,7 +49,7 @@ class EventController extends Controller
     {
         $newcomment = new Comment();
         $id         = (int)Yii::$app->request->get('id', 0);
-        if ($event = Event::find()->where(['id' => $id])->with('creator')->with('book')->with('comment')->one()) {
+        if ($event = Event::find()->where(['id' => $id])->with('creator')->with('book')->with('comment')->with('subscription')->one()) {
             $user = User::findOne(['profileId' => $event->creatorId]);
             return $this->render('index', [
                 'model'      => $event,
@@ -81,12 +79,14 @@ class EventController extends Controller
     {
         $id = (int)Yii::$app->request->get('id', 0);
         if ($event = Event::find()->where(['id' => $id])->one()) {
-            $form = new EventForm();
-            if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
-                return $this->redirect('index?id=' . $form->getIdEvent());
+            if ($event->creatorId === Yii::$app->user->id) {
+                $form = new EventForm();
+                if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
+                    return $this->redirect('index?id=' . $form->getIdEvent());
+                }
+                $form->setAttributes($event->getAttributes());
+                return $this->render('update', ['model' => $form]);
             }
-            $form->setAttributes($event->getAttributes());
-            return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);
     }
