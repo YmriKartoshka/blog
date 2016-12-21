@@ -1,10 +1,17 @@
 <?php
 
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = 'Knigopoisk - events';
 ?>
-<?php use yii\helpers\Html; ?>
+    <div class="row">
+        <div class="col-lg-6">
+            <?= Html::a('Show books', [
+                'index',
+            ], ['class' => 'btn btn-primary']); ?>
+        </div>
+    </div>
 
 <?php $form = ActiveForm::begin([
     'id'          => 'events-search-form',
@@ -29,14 +36,6 @@ $this->title = 'Knigopoisk - events';
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-lg-offset-10">
-            <?= Html::a('Books', [
-                'index',
-            ], ['class' => 'btn btn-primary']); ?>
-        </div>
-    </div>
-
 <?php ActiveForm::end(); ?>
 
 <?php $form = ActiveForm::begin([
@@ -48,14 +47,19 @@ $this->title = 'Knigopoisk - events';
     ],
 ]); ?>
 
+    <style>
+        h2 {  text-decoration: underline; }
+    </style>
+
+    <h2><?php echo 'List of Events' ?></h2>
 
     <div class="row">
     <?php foreach ($events as $event): ?>
         <div class="col-lg-12">
-            <hr /><h3><?php echo Html::a($event->name, [
+            <h3><?php echo Html::a($event->name, [
                     'event/index',
                     'id' => $event->id,
-                ]); ?></h3><hr />
+                ]); ?></h3><hr/>
         </div>
     <?php endforeach; ?>
 </div>

@@ -4,9 +4,9 @@ use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
 use app\controllers\EventController;
 use yii\helpers\Html;
-use dosamigos\datepicker\DatePicker;
+use kartik\widgets\DatePicker;
 
-$this->title                   = "Advanced search event";
+$this->title                   = "Advanced event search ";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -34,15 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]) ?>
 
-<?= $form->field($search, 'date')->widget(DatePicker::class, [
-    'inline'        => true,
-    'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-    'clientOptions' => [
-        'autoclose' => true,
-        'format'    => 'yyyy-m-dd',
-        'clearBtn'  => true,
-    ],
-]); ?>
+<?= $form->field($search, 'date')->widget(
+    DatePicker::class, [
+    'type'          => DatePicker::TYPE_COMPONENT_APPEND,
+    'options'       => ['placeholder' => 'Select date ...'],
+    'pluginOptions' => [
+        'autoclose'      => true,
+        'format'         => 'yyyy-m-dd',
+        'todayHighlight' => true
+    ]
+]) ?>
 
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
@@ -51,11 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'name'  => 'find-button',
         ]); ?>
     </div>
-</div>
+</div><br/>
 <?php ActiveForm::end(); ?>
-<hr />
 
-<h2><?= 'Results:' ?></h2>
+<style>
+    h2 {  text-decoration: underline; }
+</style>
+
+<h2><?= 'Results' ?></h2>
 
 <div class="row">
     <?php foreach ($events as $event): ?>

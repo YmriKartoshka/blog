@@ -6,15 +6,13 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use dosamigos\datepicker\DatePicker;
+use kartik\widgets\DatePicker;
 
 $this->title                   = 'Create author';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-create">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to create author:</p>
+    <h1><?= Html::encode($this->title) ?></h1><hr/>
 
     <?php $form = ActiveForm::begin([
         'id'          => 'author-create-form',
@@ -33,34 +31,32 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $form->field($model, 'birthDay')->widget(
         DatePicker::class, [
-        'inline'        => true,
-        'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-        'clientOptions' => [
-            'autoclose' => true,
-            'format'    => 'yyyy-m-dd',
-            'todayBtn'  => false
+        'type'          => DatePicker::TYPE_COMPONENT_APPEND,
+        'options'       => ['placeholder' => 'Select date ...'],
+        'pluginOptions' => [
+            'autoclose'      => true,
+            'format'         => 'yyyy-m-dd'
         ]
-    ]);?>
+    ]) ?>
 
     <?= $form->field($model, 'deathDay')->widget(
         DatePicker::class, [
-        'inline'        => true,
-        'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-        'clientOptions' => [
-            'autoclose' => true,
-            'format'    => 'yyyy-m-dd',
-            'todayBtn'  => false
+        'type'          => DatePicker::TYPE_COMPONENT_APPEND,
+        'options'       => ['placeholder' => 'Select date ...'],
+        'pluginOptions' => [
+            'autoclose'      => true,
+            'format'         => 'yyyy-m-dd'
         ]
-    ]);?>
+    ]) ?>
 
     <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Create', [
+        <div class="col-lg-offset-1 col-lg-11">
+            <?= Html::submitButton('Create', [
                     'class' => 'btn btn-primary',
                     'name'  => 'create-button',
-                ]) ?>
-            </div>
+            ]) ?>
         </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 </div>

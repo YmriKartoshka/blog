@@ -33,19 +33,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <p><?php echo 'Genre: ' . $model->genre->name; ?></p>
 <p><?php echo 'Year of publication: ' . $model->year; ?></p>
 <p><?php echo $model->description; ?></p>
-<hr />
+<hr /><br/>
 
 <h2>Comments</h2>
 <div class="row">
     <?php foreach ($model->comment as $comment): ?>
         <div class="col-lg-12">
-            <br />
-            <p>Author: <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
+            <hr />
+            <b><h5>Author: <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
                     'profile/index',
                     'id' => $comment->author->id,
                 ]); ?>
-            </p>
-            <p><?php echo 'Grade: ' . $comment->grade; ?></p>
+            </h5>
+            <h5><?php echo 'Grade: ' . $comment->grade; ?></h5></b>
             <p><?php echo $comment->message; ?></p>
         </div>
     <?php endforeach; ?>

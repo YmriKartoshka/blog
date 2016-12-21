@@ -73,6 +73,14 @@ class ChangePasswordForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'newPassword'       => 'New password',
+            'passwordConfirm'   => 'Confirm password'
+        ];
+    }
+
     public function validatePassword($attribute)
     {
         $user = $this->getUser();
