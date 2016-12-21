@@ -86,13 +86,15 @@ class BookController extends Controller
     {
         $id = (int)Yii::$app->request->get('id', 0);
         if ($book = Book::find()->where(['id' => $id])->one()) {
-            $form = new BookForm();
-            if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
-                return $this->redirect('index?id=' . $form->getIdBook());
+            if ($book->creatorId === Yii::$app->user->id) {
+                $form = new BookForm();
+                if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
+                    return $this->redirect('index?id=' . $form->getIdBook());
+                }
+                $form->setAttributes($book->getAttributes());
+                $form->year = 2016 - $form->year;
+                return $this->render('update', ['model' => $form]);
             }
-            $form->setAttributes($book->getAttributes());
-            $form->year = 2016 - $form->year;
-            return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);
     }
@@ -103,8 +105,7 @@ class BookController extends Controller
         $books = new Book();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post())) {
             $books = $form->advancedSearchBook();
-            if($form->year !== "")
-            {
+            if ($form->year !== "") {
                 $form->year = 2016 - $form->year;
             }
             return $this->render('search', [

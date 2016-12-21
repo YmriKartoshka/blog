@@ -71,8 +71,7 @@ class ProfileController extends Controller
 
     public function actionUpdate()
     {
-        $id = (int)Yii::$app->request->get('id', 0);
-        if ($profile = Profile::find()->where(['id' => $id])->one()) {
+        if ($profile = Profile::find()->where(['id' => Yii::$app->user->id])->one()) {
             if (Yii::$app->request->isPost && $profile->load(Yii::$app->request->post()) && $profile->update($id)) {
                 return $this->redirect('index?id=' . $profile->id);
             }
@@ -83,8 +82,7 @@ class ProfileController extends Controller
 
     public function actionChange()
     {
-        $id = (int)Yii::$app->request->get('id', 0);
-        if ($user = User::find()->where(['profileId' => $id])->one()) {
+        if ($user = User::find()->where(['profileId' => Yii::$app->user->id])->one()) {
             $changePasswordForm = new ChangePasswordForm();
             if (Yii::$app->request->isPost && $changePasswordForm->load(Yii::$app->request->post()) && $changePasswordForm->changePassword($id)) {
                 $profile = Profile::find()->where(['id' => $id])->one();

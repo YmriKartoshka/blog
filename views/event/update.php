@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\EventController;
 use kartik\select2\Select2;
-use dosamigos\datepicker\DatePicker;
+use kartik\date\DatePicker;
 
 $this->title                   = "Update book";
 $this->params['breadcrumbs'][] = $this->title;
@@ -37,14 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'date')->widget(
     DatePicker::class, [
-    'inline'        => true,
-    'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-    'clientOptions' => [
-        'autoclose' => true,
-        'format'    => 'yyyy-m-dd',
-        'todayBtn'  => false
+    'type'          => DatePicker::TYPE_COMPONENT_APPEND,
+    'options'       => ['placeholder' => 'Select date ...'],
+    'pluginOptions' => [
+        'autoclose'      => true,
+        'format'         => 'yyyy-m-dd',
+        'todayHighlight' => true
     ]
-]);?>
+]) ?>
 
 
 <div class="form-group">

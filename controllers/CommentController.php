@@ -8,6 +8,7 @@ use Yii;
 use yii\web\Controller;
 use app\models\Comment;
 use yii\web\HttpException;
+use yii\filters\AccessControl;
 
 class CommentController extends Controller
 {
@@ -16,6 +17,25 @@ class CommentController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => [
+                            'createbook',
+                            'createevent',
+                        ],
+                        'allow'   => true,
+                        'roles'   => ['@'],
+                    ],
+                ],
             ],
         ];
     }

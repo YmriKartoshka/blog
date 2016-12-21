@@ -22,7 +22,6 @@ use yii\helpers\Html;
              <?php if (Yii::$app->user->id === $profile->id) {
                  echo Html::a('Update', [
                      'profile/update',
-                     'id' => $profile->id,
                  ], ['class' => 'btn btn-primary']);
              } ?>
          </span>

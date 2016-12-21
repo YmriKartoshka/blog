@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\EventController;
 use kartik\select2\Select2;
-use kartik\widgets\DatePicker;
+use kartik\date\DatePicker;
 
 $this->title                   = "Create event";
 $this->params['breadcrumbs'][] = $this->title;

@@ -48,33 +48,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'book/index',
             'id' => $model->book->id,
         ]); ?></p>
-<p><?php echo 'Subscriptions: ' . Html::a(count($model->subscription), [
-        'subscription/index',
-        'id' => $model->id,
-    ]); ?></p>
+<p><?php echo 'Subscriptions: ' . count($model->subscription); ?></p>
 <p><?php echo $model->description; ?></p>
 <hr />
 
-<h2>Comments</h2>
+<h2>Subscriptions</h2>
 <div class="row">
-    <?php foreach ($model->comment as $comment): ?>
+    <?php foreach ($model->subscriptions as $subscr): ?>
         <div class="col-lg-12">
             <br />
-            <p>Author: <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
+            <p>Subscriber: <?php echo Html::a($subscr->firstName . ' ' . $subscr->lastName, [
                     'profile/index',
-                    'id' => $comment->author->id,
+                    'id' => $subscr->id,
                 ]); ?>
             </p>
-            <p><?php echo 'Grade: ' . $comment->grade; ?></p>
-            <p><?php echo $comment->message; ?></p>
         </div>
     <?php endforeach; ?>
 </div><hr />
-
-<?php if (! Yii::$app->user->isGuest) {
-    echo $this->render('../comment/createevent', [
-        'newcomment' => $newcomment,
-        'id'         => $model->id,
-    ]);
-} ?>
 

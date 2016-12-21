@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php if (Yii::$app->user->id === $profile->id) {
                 echo Html::a('Change password', [
                     'profile/change',
-                    'id' => $profile->id,
                 ], ['class' => 'btn btn-primary']);
             } ?>
          </span>
