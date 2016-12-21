@@ -2,7 +2,7 @@
 
 namespace app\forms;
 
-use app\models\book\Book;
+use app\models\event\Event;
 use app\models\User;
 use yii\base\Model;
 
@@ -12,15 +12,13 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
-class BookForm extends Model
+class EventForm extends Model
 {
     public  $name;
     public  $description;
-    public  $year;
-    public  $authorId;
-    public  $genreId;
-    public  $coverImage;
-    private $book;
+    public  $date;
+    public  $bookId;
+    private $event;
 
     /**
      * @return array the validation rules.
@@ -32,10 +30,8 @@ class BookForm extends Model
                 [
                     'name',
                     'description',
-                    //'coverImage',
-                    'authorId',
-                    'genreId',
-                    'year',
+                    'bookId',
+                    'date',
                 ],
                 'required',
             ],
@@ -50,8 +46,7 @@ class BookForm extends Model
     public function attributeLabels()
     {
         return [
-            'authorId' => 'Author',
-            'genreId'  => 'Genre',
+            'bookId' => 'Book',
         ];
     }
 
@@ -62,11 +57,10 @@ class BookForm extends Model
             return false;
         }
 
-        $this->book = new Book();
-        $this->book->setAttributes($this->getAttributes());
-        $this->book->year = 2016 - $this->book->year;
-        if (! $this->book->save()) {
-            $this->addError('name', 'Ошбка при сохранении книги в БД');
+        $this->event = new Event();
+        $this->event->setAttributes($this->getAttributes());
+        if (! $this->event->save()) {
+            $this->addError('name', 'Ошбка при сохранении события в БД');
             return false;
         }
         return true;
@@ -77,18 +71,17 @@ class BookForm extends Model
         if (! $this->validate()) {
             return false;
         }
-        $this->book = Book::find()->where(['id' => $id])->one();
-        $this->book->setAttributes($this->getAttributes());
-        $this->book->year = 2016 - $this->book->year;
-        if (! $this->book->save()) {
-            $this->addError('name', 'Ошбка при сохранении книги в БД');
+        $this->event = Event::find()->where(['id' => $id])->one();
+        $this->event->setAttributes($this->getAttributes());
+        if (! $this->event->save()) {
+            $this->addError('name', 'Ошбка при сохранении события в БД');
             return false;
         }
         return true;
     }
 
-    public function getIdBook()
+    public function getIdEvent()
     {
-        return $this->book->id;
+        return $this->event->id;
     }
 }

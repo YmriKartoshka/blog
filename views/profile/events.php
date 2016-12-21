@@ -62,16 +62,16 @@ use yii\helpers\Html;
         <span class="text-left">
             <hr /><h3><?php echo 'Created by ' . Yii::$app->user->identity->login . ':' ?></h3>
             <div class="col-lg-offset-10">
-                <?= Html::a('Events', [
-                    'events',
+                <?= Html::a('Books', [
+                    'index',
                     'id' => $profile->id,
                 ], ['class' => 'btn btn-primary']); ?>
             </div>
-            <?php foreach ($books as $book): ?>
+            <?php foreach ($events as $event): ?>
                 <div class="col-lg-12">
-                    <hr /><h3><?php echo Html::a($book->name, [
-                            'book/index',
-                            'id' => $book->id,
+                    <hr /><h3><?php echo Html::a($event->name, [
+                            'event/index',
+                            'id' => $event->id,
                         ]); ?></h3><hr />
                 </div>
             <?php endforeach; ?>

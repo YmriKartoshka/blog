@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\controllers\BookController;
-use etsoft\widgets\YearSelectbox;
+use app\controllers\EventController;
 use kartik\select2\Select2;
+use dosamigos\datepicker\DatePicker;
 
 $this->title                   = "Update book";
 $this->params['breadcrumbs'][] = $this->title;
@@ -26,39 +26,32 @@ $this->params['breadcrumbs'][] = $this->title;
     'cols' => 70,
 ]) ?>
 
-<?= $form->field($model, 'authorId')->widget(Select2::class, [
-    'data'          => BookController::getAuthors(),
-    'language'      => 'ru',
-    'options'       => ['placeholder' => 'Select author...'],
+<?= $form->field($model, 'bookId')->widget(Select2::class, [
+    'data'          => EventController::getBooks(),
+    'language'      => 'en',
+    'options'       => ['placeholder' => 'Select book...'],
     'pluginOptions' => [
         'allowClear' => true,
     ],
 ]) ?>
 
-<?= $form->field($model, 'genreId')->widget(Select2::class, [
-    'data'          => BookController::getGenres(),
-    'language'      => 'ru',
-    'options'       => ['placeholder' => 'Select genre...'],
-    'pluginOptions' => [
-        'allowClear' => true,
-    ],
-]) ?>
-
-
-<?= $form->field($model, 'year')->widget(Select2::class, [
-    'data'          => range(2016, 1800),
-    'options'       => ['placeholder' => 'Select year...'],
-    'pluginOptions' => [
-        'allowClear' => true,
-    ],
-]) ?>
+<?= $form->field($model, 'date')->widget(
+    DatePicker::class, [
+    'inline'        => true,
+    'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
+    'clientOptions' => [
+        'autoclose' => true,
+        'format'    => 'yyyy-m-dd',
+        'todayBtn'  => false
+    ]
+]);?>
 
 
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
         <?= Html::submitButton('Submit', [
             'class' => 'btn btn-primary',
-            'name'  => 'updateBook-button',
+            'name'  => 'updateEvent-button',
         ]) ?>
     </div>
 </div>

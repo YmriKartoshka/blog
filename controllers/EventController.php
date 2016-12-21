@@ -2,11 +2,12 @@
 
 namespace app\controllers;
 
-use app\forms\BookForm;
+use app\forms\EventForm;
 use app\models\book\Genre;
 use app\models\book\Author;
 use app\models\book\Book;
 use app\models\Comment;
+use app\models\event\Event;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -14,7 +15,7 @@ use yii\web\Controller;
 use yii\web\HttpException;
 use app\forms\SearchForm;
 
-class BookController extends Controller
+class EventController extends Controller
 {
     public function behaviors()
     {
@@ -50,10 +51,10 @@ class BookController extends Controller
     {
         $newcomment = new Comment();
         $id         = (int)Yii::$app->request->get('id', 0);
-        if ($book = Book::find()->where(['id' => $id])->with('creator')->with('author')->with('genre')->with('comment')->one()) {
-            $user = User::findOne(['profileId' => $book->creatorId]);
+        if ($event = Event::find()->where(['id' => $id])->with('creator')->with('book')->with('comment')->one()) {
+            $user = User::findOne(['profileId' => $event->creatorId]);
             return $this->render('index', [
-                'model'      => $book,
+                'model'      => $event,
                 'newcomment' => $newcomment,
                 'userId'     => $user->id,
             ]);
@@ -63,35 +64,28 @@ class BookController extends Controller
 
     public function actionCreate()
     {
-        $form = new BookForm();
+        $form = new EventForm();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->create()) {
-            return $this->redirect('index?id=' . $form->getIdBook());
+            return $this->redirect('index?id=' . $form->getIdEvent());
         }
         return $this->render('create', ['model' => $form]);
     }
 
-    static function getAuthors()
+    static function getBooks()
     {
-        $authorsModels = Author::find()->all();
-        return Author::toArrayAuthor($authorsModels);
-    }
-
-    static function getGenres()
-    {
-        $genresModels = Genre::find()->all();
-        return Genre::toArrayGenre($genresModels);
+        $bookModels = Book::find()->all();
+        return Book::toArrayBook($bookModels);
     }
 
     public function actionUpdate()
     {
         $id = (int)Yii::$app->request->get('id', 0);
-        if ($book = Book::find()->where(['id' => $id])->one()) {
-            $form = new BookForm();
+        if ($event = Event::find()->where(['id' => $id])->one()) {
+            $form = new EventForm();
             if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post()) && $form->update($id)) {
-                return $this->redirect('index?id=' . $form->getIdBook());
+                return $this->redirect('index?id=' . $form->getIdEvent());
             }
-            $form->setAttributes($book->getAttributes());
-            $form->year = 2016 - $form->year;
+            $form->setAttributes($event->getAttributes());
             return $this->render('update', ['model' => $form]);
         }
         throw new HttpException(404);
@@ -99,21 +93,17 @@ class BookController extends Controller
 
     public function actionSearch()
     {
-        $form  = new SearchForm();
-        $books = new Book();
+        $form   = new SearchForm();
+        $events = new Event();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post())) {
-            $books = $form->advancedSearchBook();
-            if($form->year !== "")
-            {
-                $form->year = 2016 - $form->year;
-            }
+            $events = $form->advancedSearchEvent();
             return $this->render('search', [
-                'books'  => $books,
+                'events' => $events,
                 'search' => $form,
             ]);
         }
         return $this->render('search', [
-            'books'  => $books->getBooks(),
+            'events' => $events->getEvents(),
             'search' => $form,
         ]);
     }

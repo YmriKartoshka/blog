@@ -11,7 +11,7 @@ $this->title                   = 'Registration';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-registration">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1><hr/>
 
     <p>Please fill out the following fields to registration:</p>
 

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'authorId')->widget(Select2::class, [
     'data'          => BookController::getAuthors(),
-    'language'      => 'ru',
+    'language'      => 'en',
     'options'       => ['placeholder' => 'Select author...'],
     'pluginOptions' => [
         'allowClear' => true,
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?= $form->field($model, 'genreId')->widget(Select2::class, [
     'data'          => BookController::getGenres(),
-    'language'      => 'ru',
+    'language'      => 'en',
     'options'       => ['placeholder' => 'Select genre...'],
     'pluginOptions' => [
         'allowClear' => true,

@@ -58,11 +58,11 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'id'         => 'ID',
-            'firstName'  => 'Имя',
-            'lastName'   => 'Фамилия',
-            'secondName' => 'Отчество',
+            'firstName'  => 'First name',
+            'lastName'   => 'Last name',
+            'secondName' => 'Second name',
             'email'      => 'Email',
-            'phone'      => 'Телефон',
+            'phone'      => 'Phone',
         ];
     }
 

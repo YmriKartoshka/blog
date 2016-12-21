@@ -15,6 +15,8 @@ use Yii;
 use app\models\Profile;
 use app\models\User;
 use yii\web\HttpException;
+use app\models\book\Book;
+use app\models\event\Event;
 
 class ProfileController extends Controller
 {
@@ -29,6 +31,7 @@ class ProfileController extends Controller
                             'index',
                             'update',
                             'change',
+                            'events',
                         ],
                         'allow'   => true,
                         'roles'   => [
@@ -42,9 +45,26 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
-        $id = (int)Yii::$app->request->get('id', 0);
+        $id    = (int)Yii::$app->request->get('id', 0);
+        $books = Book::find()->where(['creatorId' => $id])->all();
         if ($profile = Profile::find()->where(['id' => $id])->one()) {
-            return $this->render('index', ['profile' => $profile]);
+            return $this->render('index', [
+                'profile' => $profile,
+                'books'   => $books,
+            ]);
+        }
+        throw new HttpException(404);
+    }
+
+    public function actionEvents()
+    {
+        $id     = (int)Yii::$app->request->get('id', 0);
+        $events = Event::find()->where(['creatorId' => $id])->all();
+        if ($profile = Profile::find()->where(['id' => $id])->one()) {
+            return $this->render('events', [
+                'profile' => $profile,
+                'events'  => $events,
+            ]);
         }
         throw new HttpException(404);
     }

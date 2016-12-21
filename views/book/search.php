@@ -2,12 +2,14 @@
 
 use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
-use etsoft\widgets\YearSelectbox;
 use app\controllers\BookController;
+use yii\helpers\Html;
 
-$this->title = 'Knigopoisk';
+$this->title                   = "Advanced search book";
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php use yii\helpers\Html; ?>
+
+<h1><?= Html::encode($this->title) ?></h1><hr/>
 
 <?php $form = ActiveForm::begin([
     'id'          => 'genre-create-form',
@@ -57,27 +59,15 @@ $this->title = 'Knigopoisk';
         ]); ?>
     </div>
 </div>
+<?php ActiveForm::end(); ?><hr/>
 
-<?php ActiveForm::end(); ?>
+<h2><?= 'Results:' ?></h2>
 
-<div class="clearfix"></div>
-<table class="table table-striped table-hover">
-    <tr>
-        <td>#</td>
-        <td>Title</td>
-    </tr>
+<div class="row">
     <?php foreach ($books as $book): ?>
-        <tr>
-            <td>
-                <?php echo Html::a($book->id, [
-                    'book/index',
-                    'id' => $book->id,
-                ]); ?>
-            </td>
-            <td><?php echo Html::a($book->name, [
-                    'book/index',
-                    'id' => $book->id,
-                ]); ?></td>
-        </tr>
+        <div class="col-lg-12">
+            <h3><?php echo Html::a($book->name, array('book/index', 'id'=>$book->id)); ?></h3><hr />
+        </div>
     <?php endforeach; ?>
-</table>
+</div>
+

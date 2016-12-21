@@ -2,12 +2,12 @@
 
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Knigopoisk';
+$this->title = 'Knigopoisk - events';
 ?>
 <?php use yii\helpers\Html; ?>
 
 <?php $form = ActiveForm::begin([
-    'id'          => 'books-search-form',
+    'id'          => 'events-search-form',
     'options'     => ['class' => 'form-horizontal'],
     'fieldConfig' => [
         'template'     => "{label}\n<div class=\"col-md-offset-10\">{input}</div>\n<div class=\"col-lg-10\">{error}</div>",
@@ -24,15 +24,15 @@ $this->title = 'Knigopoisk';
                 'name'  => 'find-button',
             ]); ?>
             <?= Html::a('Advanced Search', [
-                'book/search',
+                'event/search',
             ], ['class' => 'btn btn-primary']); ?>
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-lg-offset-10">
-            <?= Html::a('Events', [
-                'events',
+            <?= Html::a('Books', [
+                'index',
             ], ['class' => 'btn btn-primary']); ?>
         </div>
     </div>
@@ -50,11 +50,11 @@ $this->title = 'Knigopoisk';
 
 
     <div class="row">
-    <?php foreach ($books as $book): ?>
+    <?php foreach ($events as $event): ?>
         <div class="col-lg-12">
-            <hr /><h3><?php echo Html::a($book->name, [
-                    'book/index',
-                    'id' => $book->id,
+            <hr /><h3><?php echo Html::a($event->name, [
+                    'event/index',
+                    'id' => $event->id,
                 ]); ?></h3><hr />
         </div>
     <?php endforeach; ?>

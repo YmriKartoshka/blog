@@ -7,7 +7,7 @@ use kartik\select2\Select2;
 
 <h4>Send Comment</h4>
 <?php $commentForm = ActiveForm::begin([
-    'action'      => '../comment/create',
+    'action'      => '../comment/createevent',
     'id'          => 'comment-form',
     'options'     => ['class' => 'form-horizontal'],
     'fieldConfig' => [
@@ -32,7 +32,7 @@ use kartik\select2\Select2;
 		<div class="col-lg-offset-1 col-lg-11">
 			<?= Html::submitButton('Send', [
                 'class' => 'btn btn-primary',
-                'name'  => 'createBook-button',
+                'name'  => 'createEvent-button',
                 'value' => $id,
             ]); ?>
 		</div>

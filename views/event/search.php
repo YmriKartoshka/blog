@@ -1,18 +1,19 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\controllers\EventController;
 use kartik\select2\Select2;
+use app\controllers\EventController;
+use yii\helpers\Html;
 use dosamigos\datepicker\DatePicker;
 
-//use app\forms\AuthorForm;
-
-$this->title                   = "Create event";
+$this->title                   = "Advanced search event";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+
+<h1><?= Html::encode($this->title) ?></h1><hr />
+
 <?php $form = ActiveForm::begin([
+    'id'          => 'genre-create-form',
     'options'     => ['class' => 'form-horizontal'],
     'fieldConfig' => [
         'template'     => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
@@ -20,15 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]); ?>
 
+<?= $form->field($search, 'name')->textInput() ?>
 
-<?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+<?= $form->field($search, 'description')->textInput() ?>
 
-<?= $form->field($model, 'description')->textArea([
-    'rows' => 10,
-    'cols' => 70,
-]) ?>
-
-<?= $form->field($model, 'bookId')->widget(Select2::class, [
+<?= $form->field($search, 'bookId')->widget(Select2::class, [
     'data'          => EventController::getBooks(),
     'language'      => 'en',
     'options'       => ['placeholder' => 'Select book...'],
@@ -37,23 +34,37 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]) ?>
 
-<?= $form->field($model, 'date')->widget(
-    DatePicker::class, [
+<?= $form->field($search, 'date')->widget(DatePicker::class, [
     'inline'        => true,
     'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
     'clientOptions' => [
         'autoclose' => true,
         'format'    => 'yyyy-m-dd',
-        'todayBtn'  => false
-    ]
-]);?>
+        'clearBtn'  => true,
+    ],
+]); ?>
 
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">
-        <?= Html::submitButton('Submit', [
+        <?= Html::submitButton('Find', [
             'class' => 'btn btn-primary',
-            'name'  => 'createEvent-button',
-        ]) ?>
+            'name'  => 'find-button',
+        ]); ?>
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+<hr />
+
+<h2><?= 'Results:' ?></h2>
+
+<div class="row">
+    <?php foreach ($events as $event): ?>
+        <div class="col-lg-12">
+            <h3><?php echo Html::a($event->name, [
+                    'event/index',
+                    'id' => $event->id,
+                ]); ?></h3><hr />
+        </div>
+    <?php endforeach; ?>
+</div>
+

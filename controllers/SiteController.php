@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\web\Controller;
 use app\models\book\Book;
+use app\models\event\Event;
 use app\forms\SearchForm;
 
 class SiteController extends Controller
@@ -26,23 +27,19 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSearch()
+    public function actionEvents()
     {
-        $form  = new SearchForm();
-        $books = new Book();
+        $form   = new SearchForm();
+        $events = new Event();
         if (Yii::$app->request->isPost && $form->load(Yii::$app->request->post())) {
-            $books = $form->advancedSearchBook();
-            if($form->year !== "")
-            {
-                $form->year = 2016 - $form->year;
-            }
-            return $this->render('search', [
-                'books'  => $books,
+            $events = $form->searchEvent();
+            return $this->render('events', [
+                'events' => $events,
                 'search' => $form,
             ]);
         }
-        return $this->render('search', [
-            'books'  => $books->getBooks(),
+        return $this->render('events', [
+            'events' => $events->getEvents(),
             'search' => $form,
         ]);
     }
