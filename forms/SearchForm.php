@@ -73,6 +73,15 @@ class SearchForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'authorId'      => 'Author',
+            'genreId'       => 'Genre',
+            'bookId'        => 'Book'
+        ];
+    }
+
     public function searchBook()
     {
         return Book::find()->filterWhere([

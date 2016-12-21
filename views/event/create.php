@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\EventController;
 use kartik\select2\Select2;
-use dosamigos\datepicker\DatePicker;
-
-//use app\forms\AuthorForm;
+use kartik\widgets\DatePicker;
 
 $this->title                   = "Create event";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::encode($this->title) ?></h1>
+
+<h1><?= Html::encode($this->title) ?></h1><hr/>
+
 <?php $form = ActiveForm::begin([
     'options'     => ['class' => 'form-horizontal'],
     'fieldConfig' => [
@@ -33,20 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
     'language'      => 'en',
     'options'       => ['placeholder' => 'Select book...'],
     'pluginOptions' => [
-        'allowClear' => true,
+        'allowClear'     => true,
     ],
 ]) ?>
 
 <?= $form->field($model, 'date')->widget(
     DatePicker::class, [
-    'inline'        => true,
-    'template'      => '<div class="well well-sm" style="background-color: #fff; width:250px">{input}</div>',
-    'clientOptions' => [
-        'autoclose' => true,
-        'format'    => 'yyyy-m-dd',
-        'todayBtn'  => false
+    'type'          => DatePicker::TYPE_COMPONENT_APPEND,
+    'options'       => ['placeholder' => 'Select date ...'],
+    'pluginOptions' => [
+        'autoclose'      => true,
+        'format'         => 'yyyy-m-dd',
+        'todayHighlight' => true
     ]
-]);?>
+]) ?>
 
 <div class="form-group">
     <div class="col-lg-offset-1 col-lg-11">

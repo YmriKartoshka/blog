@@ -5,7 +5,7 @@ use kartik\select2\Select2;
 use app\controllers\BookController;
 use yii\helpers\Html;
 
-$this->title                   = "Advanced search book";
+$this->title                   = "Advanced book search ";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -59,9 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     </div>
 </div>
-<?php ActiveForm::end(); ?><hr/>
+<br/>
+<?php ActiveForm::end(); ?>
 
-<h2><?= 'Results:' ?></h2>
+<style>
+    h2 {  text-decoration: underline; }
+</style>
+
+<h2><?= 'Results' ?></h2>
 
 <div class="row">
     <?php foreach ($books as $book): ?>
