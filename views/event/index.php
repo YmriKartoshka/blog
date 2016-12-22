@@ -68,11 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'subscription/index',
         'id' => $model->id,
     ]); ?></p>
-<p><?php if($model->publish)
-    {
-        echo 'Publish: published';
-    }else{
-        echo 'Publish: not published';
+<p><?php
+    if ($isModerator) {
+        if($model->publish)
+        {
+            echo 'Publish: published';
+        }else {
+            echo 'Publish: not published';
+        }
     } ?></p>
 <p><?php echo $model->description; ?></p>
 <hr />

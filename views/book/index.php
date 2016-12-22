@@ -47,11 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <p><?php echo 'Author: ' . $model->author->lastName . ' ' . $model->author->firstName . ' ' . $model->author->secondName; ?></p>
 <p><?php echo 'Genre: ' . $model->genre->name; ?></p>
 <p><?php echo 'Year of publication: ' . $model->year; ?></p>
-<p><?php if($model->publish)
-    {
-        echo 'Publish: published';
-    }else{
-        echo 'Publish: not published';
+<p><?php
+    if ($isModerator) {
+        if($model->publish)
+        {
+            echo 'Publish: published';
+        }else{
+            echo 'Publish: not published';
+        }
     } ?></p>
 <p><?php echo $model->description; ?></p>
 <hr /><br/>

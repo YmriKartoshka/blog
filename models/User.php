@@ -119,5 +119,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return static::findOne($id);
     }
+
+    public function beforeSave($insert)
+    {
+        $this->login = addslashes($this->login);
+        return parent::beforeSave($insert);
+    }
 }
 

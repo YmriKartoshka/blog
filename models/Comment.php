@@ -85,6 +85,7 @@ class Comment extends ActiveRecord
             $this->creatorId  = Yii::$app->user->id;
             $this->createDate = new Expression('now()');
         }
+        $this->message = addslashes($this->message);
         return parent::beforeSave($insert);
     }
 }

@@ -66,6 +66,14 @@ class Profile extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeSave($insert)
+    {
+        $this->firstName = addslashes($this->firstName);
+        $this->secondName = addslashes($this->secondName);
+        $this->lastName = addslashes($this->lastName);
+        return parent::beforeSave($insert);
+    }
+
     public static function isPhoneUnique($phone)
     {
         return ! self::find()->where(['phone' => $phone])->exists();
