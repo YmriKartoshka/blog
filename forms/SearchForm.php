@@ -9,6 +9,8 @@ use app\models\book\Author;
 use app\models\book\Genre;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use app\models\User;
+use Yii;
 
 class SearchForm extends Model
 {
@@ -84,11 +86,16 @@ class SearchForm extends Model
 
     public function searchBook()
     {
-        return Book::find()->filterWhere([
+        $books = Book::find()->filterWhere([
             'like',
             'name',
             $this->name,
-        ])->orderBy('id')->all();
+        ]);
+        if(null !== ($user = User::find()->where(['id' => Yii::$app->user->id])->one()) && ! $user->isModerator)
+        {
+            $books->andWhere(['publish' => 1]);
+        }
+        return $books->orderBy('id')->all();
     }
 
     public function advancedSearchBook()
@@ -112,6 +119,10 @@ class SearchForm extends Model
             $this->year = 2016 - $this->year;
             $query->andWhere(['year' => $this->year]);
         }
+        if(null !== ($user = User::find()->where(['id' => Yii::$app->user->id])->one()) && ! $user->isModerator)
+        {
+            $query->andWhere(['publish' => 1]);
+        }
         $ids = $query->orderBy('id')->all();
         $ids = ArrayHelper::getColumn($ids, 'id');
 
@@ -120,11 +131,16 @@ class SearchForm extends Model
 
     public function searchEvent()
     {
-        return Event::find()->filterWhere([
+        $events = Event::find()->filterWhere([
             'like',
             'name',
             $this->name,
-        ])->orderBy('id')->all();
+        ]);
+        if(null !== ($user = User::find()->where(['id' => Yii::$app->user->id])->one()) && ! $user->isModerator)
+        {
+            $events->andWhere(['publish' => 1]);
+        }
+        return $events->orderBy('id')->all();
     }
 
     public function advancedSearchEvent()
@@ -143,6 +159,10 @@ class SearchForm extends Model
         }
         if ($this->bookId !== "") {
             $query->andWhere(['bookId' => $this->bookId]);
+        }
+        if(null !== ($user = User::find()->where(['id' => Yii::$app->user->id])->one()) && ! $user->isModerator)
+        {
+            $query->andWhere(['publish' => 1]);
         }
         $ids = $query->orderBy('id')->all();
         $ids = ArrayHelper::getColumn($ids, 'id');

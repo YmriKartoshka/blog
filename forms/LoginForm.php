@@ -52,7 +52,7 @@ class LoginForm extends Model
     public function validatePassword($attribute)
     {
         $user = $this->getUser();
-        if (! $user || ! $user->validatePasswordHash($this->password)) {
+        if (! $user || ! $user->validatePasswordHash($this->password) || $user->isBan) {
             $this->addError($attribute, 'Неверный логин и/или пароль.');
         }
     }

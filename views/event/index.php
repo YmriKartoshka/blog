@@ -32,6 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
                      'subscription/create',
                      'id' => $model->id,
                  ], ['class' => 'btn btn-primary']);
+             }
+             if ($isModerator) {
+                 if($model->publish)
+                 {
+                     echo Html::a('Block', [
+                         'event/hide',
+                         'id' => $model->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+                 else{
+                     echo Html::a('Unblock', [
+                         'event/hide',
+                         'id' => $model->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+
              }?>
          </span>
     </div>
@@ -52,6 +68,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'subscription/index',
         'id' => $model->id,
     ]); ?></p>
+<p><?php if($model->publish)
+    {
+        echo 'Publish: published';
+    }else{
+        echo 'Publish: not published';
+    } ?></p>
 <p><?php echo $model->description; ?></p>
 <hr />
 
@@ -59,14 +81,41 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="row">
     <?php foreach ($model->comment as $comment): ?>
         <div class="col-lg-12">
-            <br />
-            <p>Author: <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
-                    'profile/index',
-                    'id' => $comment->author->id,
-                ]); ?>
-            </p>
-            <p><?php echo 'Grade: ' . $comment->grade; ?></p>
-            <p><?php echo $comment->message; ?></p>
+            <?php
+            if($comment->isShown || $isModerator)
+            { ?>
+                <hr />
+                <b><h5>Author: <?php echo Html::a($comment->author->firstName . ' ' . $comment->author->lastName, [
+                            'profile/index',
+                            'id' => $comment->author->id,
+                        ]); ?>
+                    </h5>
+                    <h5><?php echo 'Grade: ' . $comment->grade; ?></h5></b>
+                <p><?php echo $comment->message; ?></p>
+            <?php }
+            ?>
+        </div>
+        <div class="col-lg-12">
+        <span class="pull-right">
+             <?if ($isModerator) {
+                 if($comment->isShown)
+                 {
+                     echo Html::a('Block', [
+                         'comment/hideevent',
+                         'id' => $comment->id,
+                         'event' => $model->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+                 else{
+                     echo Html::a('Unblock', [
+                         'comment/hideevent',
+                         'id' => $comment->id,
+                         'event' => $model->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+
+             }?>
+         </span>
         </div>
     <?php endforeach; ?>
 </div><hr />

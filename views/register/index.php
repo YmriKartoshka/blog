@@ -13,8 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-registration">
     <h1><?= Html::encode($this->title) ?></h1><hr/>
 
-    <p>Please fill out the following fields to registration:</p>
-
     <?php $form = ActiveForm::begin([
         'id'          => 'registration-form',
         'options'     => ['class' => 'form-horizontal'],

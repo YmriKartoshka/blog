@@ -20,7 +20,7 @@ class m161203_075251_create_book_table extends Migration
             'year'        => $this->integer(),
             'authorId'    => $this->integer(),
             'genreId'     => $this->integer(),
-            'publish'     => $this->smallInteger(1)->defaultValue(0),
+            'publish'     => $this->smallInteger(1)->defaultValue(1),
             'creatorId'   => $this->integer(),
             'createDate'  => $this->date(),
         ]);

@@ -58,26 +58,40 @@ class SubscriptionController extends Controller
 
     public function actionCreate()
     {
-        $subscription          = new Subscription();
-        $subscription->idEvent = (int)Yii::$app->request->get('id', 0);
-        $subscription->idUser  = Yii::$app->user->id;
-        if (! $subscription->validate() || ! $subscription->save()) {
-            throw new HttpException(404);
+        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
+        if(! $user->isBan)
+        {
+            $subscription          = new Subscription();
+            $subscription->idEvent = (int)Yii::$app->request->get('id', 0);
+            $subscription->idUser  = Yii::$app->user->id;
+            $event = Event::find()->where(['id' => $subscription->idEvent])->one();
+            if($event->publish)
+            {
+                if (! $subscription->validate() || ! $subscription->save()) {
+                    throw new HttpException(404);
+                }
+            }
+            return $this->redirect('../event/index?id=' . $subscription->idEvent);
         }
-        return $this->redirect('../event/index?id=' . $subscription->idEvent);
+        return $this->redirect('../login/logout');
     }
 
     public function actionDelete()
     {
-        $idEvent = (int)Yii::$app->request->get('id', 0);
-        if ($subscription = Subscription::find()->where(['idEvent' => $idEvent])->andWhere(['idUser' => Yii::$app->user->id])->one()) {
-            if ($subscription->idUser === Yii::$app->user->id) {
-                if (! $subscription->delete()) {
-                    throw new HttpException(404);
+        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
+        if(! $user->isBan)
+        {
+            $idEvent = (int)Yii::$app->request->get('id', 0);
+            if ($subscription = Subscription::find()->where(['idEvent' => $idEvent])->andWhere(['idUser' => Yii::$app->user->id])->one()) {
+                if ($subscription->idUser === Yii::$app->user->id) {
+                    if (! $subscription->delete()) {
+                        throw new HttpException(404);
+                    }
+                    return $this->redirect('../event/index?id=' . $subscription->idEvent);
                 }
-                return $this->redirect('../event/index?id=' . $subscription->idEvent);
             }
+            throw new HttpException(404);
         }
-        throw new HttpException(404);
+        return $this->redirect('../login/logout');
     }
 }

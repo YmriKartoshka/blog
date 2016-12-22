@@ -22,7 +22,6 @@ use yii\helpers\Html;
              <?php if (Yii::$app->user->id === $profile->id) {
                  echo Html::a('Update', [
                      'profile/update',
-                     'id' => $profile->id,
                  ], ['class' => 'btn btn-primary']);
              } ?>
          </span>
@@ -73,10 +72,17 @@ use yii\helpers\Html;
     <span class="text-left">
         <?php foreach ($events as $event): ?>
             <div class="col-lg-12">
-               <h3><?php echo Html::a($event->name, [
-                        'event/index',
-                        'id' => $event->id,
-                    ]); ?>
+               <h3><?php
+                   if($event->publish || $isModerator) {
+                       echo Html::a($event->name, [
+                           'event/index',
+                           'id' => $event->id,
+                       ]);
+                   }
+                   else
+                   {
+                       echo $event->name;
+                   }?>
                </h3><hr/>
             </div>
         <?php endforeach; ?>

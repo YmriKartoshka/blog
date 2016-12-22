@@ -23,7 +23,22 @@ use yii\helpers\Html;
                  echo Html::a('Update', [
                      'profile/update',
                  ], ['class' => 'btn btn-primary']);
-             } ?>
+             }
+             if ($isModerator) {
+                 if($isBan)
+                 {
+                     echo Html::a('Unblock', [
+                         'profile/block',
+                         'id' => $profile->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+                 else{
+                     echo Html::a('Block', [
+                         'profile/block',
+                         'id' => $profile->id,
+                     ], ['class' => 'btn btn-primary']);
+                 }
+             }?>
          </span>
     </div>
 </div>
@@ -71,10 +86,17 @@ use yii\helpers\Html;
     <span class="text-left">
         <?php foreach ($books as $book): ?>
             <div class="col-lg-12">
-                <h3><?php echo Html::a($book->name, [
-                        'book/index',
-                        'id' => $book->id,
-                    ]); ?>
+                <h3><?php
+                    if($book->publish || $isModerator) {
+                        echo Html::a($book->name, [
+                            'book/index',
+                            'id' => $book->id,
+                        ]);
+                    }
+                    else
+                    {
+                        echo $book->name;
+                    }?>
                 </h3><hr/>
             </div>
         <?php endforeach; ?>

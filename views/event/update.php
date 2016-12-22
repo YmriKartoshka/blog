@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\controllers\EventController;
 use kartik\select2\Select2;
-use kartik\date\DatePicker;
+use kartik\widgets\DatePicker;
 
-$this->title                   = "Update book";
+$this->title                   = "Update event";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1><hr/>
