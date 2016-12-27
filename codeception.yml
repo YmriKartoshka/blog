@@ -15,7 +15,9 @@ extensions:
 modules:
     config:
         Db:
-            dsn: 'mysql:host=mysql;dbname=book'
-            user: 'root'
-            password: '1234'
-            dump: tests/_data/dump.sql
+            dsn: 'pgsql:host=localhost;dbname=b'
+            user: 'postgres'
+            password: 'gfhjkzrf'
+            dump: tests/_data/bookDump.sql
+            populate: true
+            cleanup: true

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\tests\unit;
+namespace app\forms;
 
 use app\models\Profile;
 use app\models\User;
@@ -126,8 +126,6 @@ class RegisterForm extends Model
             return false;
         }
         $user->profileId    = $profile->id;
-        echo '<pre>';
-        print_r($user->getAttributes());
 
         if (! $user->save()) {
             return false;
