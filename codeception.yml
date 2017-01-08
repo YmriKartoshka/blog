@@ -15,7 +15,7 @@ extensions:
 modules:
     config:
         Db:
-            dsn: 'pgsql:host=localhost;dbname=b'
+            dsn: ''
             user: 'postgres'
             password: 'gfhjkzrf'
             dump: tests/_data/bookDump.sql

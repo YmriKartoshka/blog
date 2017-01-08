@@ -36,7 +36,7 @@ class RegisterFormCest
         $this->form->phone           = '89138118685';
         $I->assertTrue($this->form->validate());
     }
-    public function validateTestRegister(UnitTester $I)
+    /*public function validateTestRegister(UnitTester $I)
     {
         $I->wantTo('Good Result Register');
         $this->form                  = new RegisterForm();
@@ -152,5 +152,5 @@ class RegisterFormCest
             'email'      => 'mail123@mail.com',
             'phone'      => '89138118685',
         ]);
-    }
+    }*/
 }

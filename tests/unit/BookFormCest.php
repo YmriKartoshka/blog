@@ -32,7 +32,7 @@ class BookFormCest
         $I->assertTrue($this->form->validate());
     }
 
-    public function validateTestCreateBad(UnitTester $I)
+    /*public function validateTestCreateBad(UnitTester $I)
     {
         $I->wantTo('Bad Result Create');
         $this->form              = new BookForm();
@@ -145,5 +145,5 @@ class BookFormCest
             'name'        => '',
             'description' => '" OR ""=""; --',
         ]);
-    }
+    }*/
 }
